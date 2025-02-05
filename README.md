@@ -14,44 +14,7 @@ The project follows the principles of Hexagonal Architecture, which separates th
 
 ## Project Structure Overview
 
-src
-└── com
-    └── example
-        └── demo
-            ├── application
-            │   ├── dto
-            │   │   ├── AccountDTO.java
-            │   │   └── ClientDTO.java
-            │   ├── mapper
-            │   │   └── ClientMapper.java
-            │   └── service
-            │       └── ClientServiceApplication.java
-            ├── domain
-            │   ├── entity
-            │   │   ├── Account.java
-            │   │   └── Client.java
-            │   ├── ports
-            │   │   ├── in
-            │   │   │   ├── AccountInterfacePortIn.java
-            │   │   │   └── ClientInterfacePortIn.java
-            │   │   └── out
-            │   │       ├── AccountInterfacePortOut.java
-            │   │       └── ClientInterfacePortOut.java
-            │   └── service
-            │       └── ServiceDomainClient.java
-            ├── infrastructure
-            │   ├── controller
-            │   │   └── ClientController.java
-            │   ├── entity
-            │   │   └── ClientEntityRepository.java
-            │   ├── mapper
-            │   │   └── ClientMapperRepository.java
-            │   ├── repository
-            │   │   ├── ClientRepository.java
-            │   │   └── ClientRepositoryJpa.java
-            │   └── service
-            │       └── ClientServiceInfrastructure.java
-            └── DemoApplication.java
+![Texto alternativo de la imagen](src/main/resources/static/hex-arch.png)
 
 
 ## Technologies Used
