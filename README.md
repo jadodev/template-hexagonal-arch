@@ -29,7 +29,7 @@ The project follows the principles of Hexagonal Architecture, which separates th
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/your-repo/hexagonal-architecture-template.git
+    git clone https://github.com/jadodev/template-hexagonal-arch.git
     ```
 
 2. Set up MySQL and configure your database:
