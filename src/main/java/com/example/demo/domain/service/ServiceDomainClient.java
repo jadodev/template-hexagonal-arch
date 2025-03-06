@@ -1,8 +1,11 @@
 package com.example.demo.domain.service;
 
+import com.example.demo.domain.entity.Account;
 import com.example.demo.domain.entity.Client;
 import com.example.demo.domain.ports.in.ClientInterfacePortIn;
+import com.example.demo.domain.ports.out.AccountInterfacePortOut;
 import com.example.demo.domain.ports.out.ClientInterfacePortOut;
+import com.example.demo.exceptons.ClientAlreadyExistsException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,17 +14,26 @@ import java.util.Optional;
 @Service
 public class ServiceDomainClient implements ClientInterfacePortIn {
     private final ClientInterfacePortOut clientRepository;
+    private final AccountInterfacePortOut accountRepository;
 
-    public ServiceDomainClient(ClientInterfacePortOut clientRepository) {
+    public ServiceDomainClient(ClientInterfacePortOut clientRepository, AccountInterfacePortOut accountRepository) {
         this.clientRepository = clientRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Override
     public Client create(Client client) {
-    if (clientRepository.existsByIdentification(client.getIdentification())){
-        throw new IllegalArgumentException("El cliente con esta identificación ya existe.");
-    }
-        return clientRepository.save(client);
+        if (clientRepository.existsByIdentification(client.getIdentification())) {
+            throw new ClientAlreadyExistsException("El usuario ya existe");
+        }
+
+        Client savedClient = clientRepository.save(client);
+
+        Account account = savedClient.getAccount();
+
+        accountRepository.save(account);
+
+        return savedClient;
     }
 
     @Override
@@ -48,7 +60,6 @@ public class ServiceDomainClient implements ClientInterfacePortIn {
         }else {
             throw new RuntimeException("client not found");
         }
-
     }
 
     @Override

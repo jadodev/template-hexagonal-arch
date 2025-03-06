@@ -1,18 +1,18 @@
 package com.example.demo.domain.entity;
 
-import java.util.List;
+import com.example.demo.domain.type.AccountType;
 
 public class Client {
-    private long identification;
+    private final long identification;
     private String name;
     private String lastname;
-//    private List<Account> accounts;
+    private Account account;
 
-    public Client(long identification, String name, String lastname){
+    public Client(long identification, String name, String lastname, AccountType accountType) {
         this.identification = identification;
         this.name = name;
         this.lastname = lastname;
-//        this.accounts = accounts;
+        this.account = new Account( identification, name, lastname, accountType);
     }
 
     public long getIdentification() {
@@ -35,11 +35,8 @@ public class Client {
         this.lastname = lastname;
     }
 
-//    public List<Account> getAccounts() {
-//        return accounts;
-//    }
-//
-//    public void setAccounts(List<Account> accounts) {
-//        this.accounts = accounts;
-//    }
+    public Account getAccount() {
+        return account;
+    }
+
 }

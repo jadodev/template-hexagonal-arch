@@ -1,5 +1,6 @@
 package com.example.demo.application.service;
 
+import com.example.demo.application.dto.AccountDTO;
 import com.example.demo.application.dto.ClientDTO;
 import com.example.demo.application.mapper.ClientMapper;
 import com.example.demo.domain.entity.Client;
@@ -13,16 +14,33 @@ import java.util.stream.Collectors;
 @Service
 public class ClientServiceApplication {
     private final ClientInterfacePortIn clientInterfacePortIn;
+    private final AccountApplicationService accountService;
+    private AccountDTO accountDTO;
 
-    public ClientServiceApplication(ClientInterfacePortIn clientInterfacePortIn) {
+    public ClientServiceApplication(ClientInterfacePortIn clientInterfacePortIn, AccountApplicationService accountService) {
         this.clientInterfacePortIn = clientInterfacePortIn;
+        this.accountService = accountService;
     }
 
     public ClientDTO create(ClientDTO clientDto){
         try {
             Client newClient = ClientMapper.toEntity(clientDto);
-            Client saveClient = clientInterfacePortIn.create(newClient);
-            return ClientMapper.toDto(saveClient);
+            Client savedClient = clientInterfacePortIn.create(newClient);
+
+            AccountDTO accountDTO = new AccountDTO(
+                    savedClient.getIdentification(),
+                    savedClient.getAccount().getNumber(),
+                    savedClient.getName(),
+                    savedClient.getLastname(),
+                    savedClient.getAccount().getType(),
+                    savedClient.getAccount().getAmount(),
+                    savedClient.getAccount().getSecurityNumber()
+            );
+
+            accountService.create(accountDTO);
+
+            return ClientMapper.toDto(savedClient);
+
         } catch (Exception e){
             throw new RuntimeException("Error creating client", e);
         }

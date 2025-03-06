@@ -7,7 +7,5 @@ import java.util.Optional;
 
 public interface AccountInterfacePortIn {
     Account create(Account account);
-    Optional<Account> getAccountById(long id);
-    void deleteAccount(long id);
-    Account updateAccount(long id, Account account);
+    Optional<Account> getAccountbyIdUser(long userId);
 }

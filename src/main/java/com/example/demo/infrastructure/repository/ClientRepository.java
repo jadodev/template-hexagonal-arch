@@ -1,9 +1,8 @@
 package com.example.demo.infrastructure.repository;
 
-import com.example.demo.application.dto.ClientDTO;
 import com.example.demo.domain.entity.Client;
 import com.example.demo.domain.ports.out.ClientInterfacePortOut;
-import com.example.demo.infrastructure.entity.ClientEntityRepository;
+import com.example.demo.infrastructure.entity.ClientEntity;
 import com.example.demo.infrastructure.mapper.ClientMapperRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +20,7 @@ public class ClientRepository implements ClientInterfacePortOut{
 
     @Override
     public Client save(Client client) {
-        ClientEntityRepository clientEntity = ClientMapperRepository.toEntity(client);
+        ClientEntity clientEntity = ClientMapperRepository.toEntity(client);
         return ClientMapperRepository.toDomain(clientRepository.save(clientEntity));
     }
 
@@ -66,7 +65,7 @@ public class ClientRepository implements ClientInterfacePortOut{
                    existingClient.setName(client.getName());
                    existingClient.setLastname(client.getLastname());
 
-                   ClientEntityRepository updateEntity =  ClientMapperRepository.toEntity(existingClient);
+                   ClientEntity updateEntity =  ClientMapperRepository.toEntity(existingClient);
                    return ClientMapperRepository.toDomain(clientRepository.save(updateEntity));
                })
                .orElseThrow(()-> new RuntimeException("Client not found"));

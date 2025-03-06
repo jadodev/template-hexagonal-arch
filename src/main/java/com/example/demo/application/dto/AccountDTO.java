@@ -1,35 +1,45 @@
 package com.example.demo.application.dto;
 
+import com.example.demo.domain.type.AccountType;
 
 public class AccountDTO {
-    private String type;
+    private long userId;
     private String number;
-    private Double amounth;
+    private String name;
+    private String lastname;
+    private AccountType type;
+    private double amount;
+    private int securityNumber;
 
-    public AccountDTO(String type, Double amounth, String number){
-        this.type = type;
-        this.amounth = amounth;
+    public AccountDTO(long userId, String number, String name, String lastname, AccountType type, double amount, int securityNumber) {
+        this.userId = userId;
         this.number = number;
+        this.name = name;
+        this.lastname = lastname;
+        this.type = type;
+        this.amount = amount;
+        this.securityNumber = securityNumber;
     }
 
-    public String getType() {
+    public long getUserId() {
+        return userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+
+    public AccountType getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public Double getAmounth() {
-        return amounth;
-    }
-
-    public void setAmounth(Double amounth) {
-        this.amounth = amounth;
+    public double getAmount() {
+        return amount;
     }
 
 }

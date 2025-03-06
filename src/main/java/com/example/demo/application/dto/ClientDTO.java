@@ -1,20 +1,18 @@
 package com.example.demo.application.dto;
 
-import com.example.demo.domain.entity.Account;
-
-import java.util.List;
+import com.example.demo.domain.type.AccountType;
 
 public class ClientDTO {
     private long identification;
     private String name;
     private String lastname;
-//    private List<Account> accounts;
+    private AccountType type;
 
-    public ClientDTO(long identification, String name, String lastname){
+    public ClientDTO(long identification, String name, String lastname, AccountType type){
         this.identification = identification;
         this.name = name;
         this.lastname = lastname;
-//        this.accounts = accounts;
+        this.type = type;
     }
 
     public long getIdentification() {
@@ -25,23 +23,15 @@ public class ClientDTO {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setIdentification(long identification) {
+        this.identification = identification;
     }
 
-//    public List<Account> getAccounts() {
-//        return accounts;
-//    }
-//
-//    public void setAccounts(List<Account> accounts) {
-//        this.accounts = accounts;
-//    }
+    public AccountType getType() {
+        return type;
+    }
 }
